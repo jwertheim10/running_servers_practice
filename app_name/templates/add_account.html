@@ -1,0 +1,7 @@
+{% comment %} <!- pages/templates/pages/home.html -> {% endcomment %}
+<h1>Create a user</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Renders the form fields as paragraphs -->
+    <input type="submit" value="Submit">
+</form>
