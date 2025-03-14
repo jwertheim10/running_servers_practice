@@ -153,21 +153,23 @@ class CustomTokenObtainProtectedInfo(APIView):
             # Decode and verify the token using the public key or secret
             if token:
                 token = token.split(' ')[1]  # This line will fail if there's no "Bearer"
+                print(token)
             else:
                 return Response({'error': 'Token is required in the Authorization header'}, status=status.HTTP_400_BAD_REQUEST)
             decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
-
+            print(decoded_token, 'DECODED')
             # Get the user based on the user_id stored in the JWT
             user_id = decoded_token.get('user_id')
             user = Accounts.objects.get(id=user_id)
-            
-            # Prepare the response data
+            type(user.phone)
             data = {
                 'first_name': user.first_name,
                 'last_name': user.last_name,
                 'email': user.email,
-                'phone': user.phone
+                'phone': str(user.phone)
             }
+
+            type(user.phone)
 
             return Response(data, status=status.HTTP_200_OK)
 
