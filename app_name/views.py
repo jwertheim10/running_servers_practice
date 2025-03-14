@@ -137,7 +137,7 @@ class CustomTokenObtainView(APIView):
         data = {
             'first name': user.first_name,
             'last name': user.last_name,
-            'username': user.username,
+            'username': user.username, 
             'token': access_token
         }
         return JsonResponse(data)
